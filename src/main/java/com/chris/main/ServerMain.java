@@ -16,7 +16,7 @@ public class ServerMain {
     public static void main(String[] args) {
         try {
             ModuleManager moduleManager = ModuleManager.getInstance();
-            moduleManager.regModules(Pair.of("RLRModule",-1L));
+            moduleManager.regModules(Pair.of("com.chris.example.RLRModule",-1L));
             
             try {
                 serviceSocket =  new NettyWebSocketServer(8800);
