@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration>
+
+    <!-- This appender prints information to console -->
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern" value="%d [%p][%F(%L)]: %m%n" />
+        </layout>
+        <filter class="com.chris.log4j.filters.ConsoleFilter" />
+    </appender>
+
+    <!-- This appender prints all that is shown in console to file -->
+    <appender name="CONSOLE_TO_FILE" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="log/console.log" />
+        <param name="append" value="true" />
+        <param  name="DatePattern"  value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern" value="%d [%p][%F(%L)]: %m%n" />
+        </layout>
+        <filter class="com.chris.log4j.filters.ConsoleFilter" />
+    </appender>
+
+    <!-- This appender accepts only messages with exceptions and logs them to
+        separate file -->
+    <appender name="ERROR_APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="log/errors.log" />
+        <param name="append" value="true" />
+        <param  name="DatePattern"  value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern" value="%d [%p][%F(%L)]: %m%n" />
+        </layout>
+        <filter class="com.chris.log4j.filters.ThrowablePresentFilter" />
+    </appender>
+
+    <!-- Warn Log -->
+    <appender name="WARN_APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="log/warn.log" />
+        <param name="append" value="true" />
+        <param  name="DatePattern"  value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern" value="%d [%p][%F(%L)]: %m%n" />
+        </layout>
+        <filter class="com.chris.log4j.filters.WarnFilter" />
+    </appender>
+
+
+    <appender name="ERROR" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="log/ERROR.log" />
+        <param name="append" value="true" />
+        <param  name="DatePattern"  value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern" value="%d [%p][%F(%L)]: %m%n" />
+        </layout>
+        <filter class="com.chris.log4j.filters.ErrorFilter" />
+    </appender>
+
+    <!-- Audit -->
+    <appender name="AUDIT" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="log/audit.log" />
+        <param name="append" value="true" />
+        <param  name="DatePattern"  value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern" value="%d [%p][%F(%L)]: %m%n" />
+        </layout>
+        <filter class="com.chris.log4j.filters.AuditFilter" />
+    </appender>
+
+    <!-- Item -->
+    <appender name="ITEM" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="log/item.log" />
+        <param name="append" value="true" />
+        <param  name="DatePattern"  value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern" value="%d [%p][%F(%L)]: %m%n" />
+        </layout>
+        <filter class="com.chris.log4j.filters.ItemFilter" />
+    </appender>
+
+
+    <appender name="AB" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="log/ab.log" />
+        <param name="append" value="true" />
+        <param  name="DatePattern"  value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern" value="%m%n" />
+        </layout>
+        <filter class="com.chris.log4j.filters.ABFilter" />
+    </appender>
+
+    <!-- Unknown Packets -->
+    <appender name="UNKNOWN_PACKETS" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="file" value="log/unknown-packets.log" />
+        <param name="append" value="true" />
+        <param  name="DatePattern"  value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern" value="%d [%p][%F(%L)]: %m%n" />
+        </layout>
+        <filter class="com.chris.log4j.filters.UnknownPacketsFilter" />
+    </appender>
+
+    <!-- Root Logger -->
+    <root>
+        <priority value="info" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="CONSOLE_TO_FILE" />
+        <appender-ref ref="ERROR_APPENDER" />
+        <appender-ref ref="WARN_APPENDER" />
+        <appender-ref ref="ERROR" />
+        <appender-ref ref="AUDIT" />
+        <appender-ref ref="ITEM" />
+        <appender-ref ref="AB" />
+        <appender-ref ref="UNKNOWN_PACKETS" />
+    </root>
+
+    <categoryFactory
+            class="com.chris.log4j.ThrowableAsMessageAwareFactory" />
+
+</log4j:configuration>
